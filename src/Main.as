@@ -46,11 +46,11 @@ package
 			// traces true
 			
 			trace("\t", "WorkerDomain.isSupported: " + (WorkerDomain.isSupported));
-			// traces false
+			// traces false with fdt, true with fb 4.7
 			
 			_worker = WorkerDomain.current.createWorker(swf);
 			trace("\t", "_worker: " + (_worker));
-			// traces null
+			// traces null with fdt, [object Worker] with fb 4.7
 		}
 	}
 }
