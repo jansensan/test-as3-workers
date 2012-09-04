@@ -12,8 +12,8 @@ function embedSWF(swfURL)
 	flashvars.timestamp = Number(new Date());
 	
 	var params = {};
-	params.allowFullScreen = "false";
-	params.allowScriptAccess = "always";
+	params.allowFullScreen = "true";
+	params.allowScriptAccess = "sameDomain";
 	params.bgColor = "#ffffff";
 	params.quality = "high";
 	params.wmode = "opaque";

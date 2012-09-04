@@ -1,4 +1,4 @@
-#Tue Aug 28 16:17:59 EDT 2012
+#Tue Sep 04 12:27:03 EDT 2012
 com.powerflasher.fdt.core.CompatiblePlayers=External_SWF_Viewer\:Browser\:Standalone_Flash_Player
 com.powerflasher.fdt.core.CompilerArguments=-static-link-runtime-shared-libraries\=true\n-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=640,360\n-swf-version\=17
 com.powerflasher.fdt.core.DefaultOutputFolder=www
