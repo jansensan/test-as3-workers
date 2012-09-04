@@ -1,12 +1,10 @@
 test-as3-workers
 ================
 
-This project has been built with FDT5.
+This project has been originally built with FDT 5.6.2, following Lee Brimelow's tutorials (http://www.gotoandlearn.com/play.php?id=162, http://www.gotoandlearn.com/play.php?id=163).
 
-Currently, publishing "src/Secondary.as" to "www/assets/swf/secondary.swf" works properly, however when trying to run "src/Main.as", an error show up:
+It didn't seem to work at first, so I asked a question on StackOverflow: http://stackoverflow.com/questions/12167182/issue-with-basic-as3-workers-classes
 
-	Exception fault: TypeError: Error #1007: Instantiation attempted on a non-constructor.
-		at Main/init()[/Volumes/DOCUMENTS/Tests/AS3/test-workers/src/Main.as:52]
-		at Main()[/Volumes/DOCUMENTS/Tests/AS3/test-workers/src/Main.as:32]
+With the answers obtained there, I ended up asking questions to Lee Brimelow on Twitter, which lead me to find that while WorkerDomain.isSupported returned true under FB 4.7, WorkerDomain.isSupported would return false under FDT 5.6.2.
 
-I have followed Lee Brimelow's tutorials (http://www.gotoandlearn.com/play.php?id=162, http://www.gotoandlearn.com/play.php?id=163), but somehow this doesn't work.
+I have filed a bug report with FDT (http://bugs.powerflasher.com/jira/browse/FDT-2907), and will update this code as this situation develops.
