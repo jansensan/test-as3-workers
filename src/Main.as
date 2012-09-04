@@ -37,13 +37,20 @@ package
 			// create worker
 			var swf:ByteArray = new SecondaryClass();
 			trace("\t", "is swf null: " + (swf == null));
+			// traces false
 			
 			trace("\t", "Capabilities.version: " + (Capabilities.version));
+			// traces MAC 11,4,400,252
+			
 			trace("\t", "Capabilities.isDebugger: " + (Capabilities.isDebugger));
+			// traces true
+			
 			trace("\t", "WorkerDomain.isSupported: " + (WorkerDomain.isSupported));
+			// traces false
 			
 			_worker = WorkerDomain.current.createWorker(swf);
 			trace("\t", "_worker: " + (_worker));
+			// traces null
 		}
 	}
 }
