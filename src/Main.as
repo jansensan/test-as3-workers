@@ -1,8 +1,6 @@
 package
 {
 	import flash.display.Sprite;
-	import flash.display.StageAlign;
-	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.system.Capabilities;
 	import flash.system.MessageChannel;
@@ -16,32 +14,28 @@ package
 		private var SecondaryClass	:Class;
 
 
-		private	var	_worker:Worker;
-		private var _channelToMain:MessageChannel;
-		private var _channelToSecondary:MessageChannel;
+		private	var	_worker				:Worker;
+		private	var	_channelToMain		:MessageChannel;
+		private	var	_channelToSecondary	:MessageChannel;
 
 
 		public function Main()
 		{
 			super();
-			initStage();
+			
+			// if there is support for workers
 			if(WorkerDomain.isSupported)
 			{
 				createMainThread();
 			}
+			
+			// otherwise trace the capabilities
 			else
 			{
 				trace("\t", "Capabilities.version: " + (Capabilities.version));
 				trace("\t", "Capabilities.isDebugger: " + (Capabilities.isDebugger));
 				trace("\t", "WorkerDomain.isSupported: " + (WorkerDomain.isSupported));
 			}
-		}
-
-
-		private function initStage():void
-		{
-			stage.align = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
 		}
 
 
@@ -74,16 +68,25 @@ package
 
 		private function onMessageReceivedFrom2ndThread(_:Event):void
 		{
-			trace("\n", this, "---  onMessageReceivedFrom2ndThread  ---");
-			
 			if(_channelToMain.messageAvailable)
 			{
 				var message:* = _channelToMain.receive();
-				trace("\t", "message: " + (message));
-				if(String(message) == "send something back")
+				if(message is String)
 				{
-					trace("tell 2nd thread all values received");
-					_channelToSecondary.send("all values received!");
+					var str:String = String(message);
+					trace("\t", "message: " + (str));
+					
+					if(str == MessageID.START_TRANSFER)
+					{
+						trace("\t", "number: " + (_channelToMain.receive()));
+						trace("\t", "array: " + (_channelToMain.receive()));
+						trace("\t", "object: " + (_channelToMain.receive()));
+						_channelToSecondary.send(MessageID.CONFIRM_RECEPTION);
+					}
+					if(str == MessageID.TEN_FOUR)
+					{
+						trace("all data received, secondary thread confirmed reception");
+					}
 				}
 			}
 		}

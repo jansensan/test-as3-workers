@@ -11,8 +11,8 @@ package
 	 */
 	public class Secondary extends Sprite
 	{
-		private var _channelToMain:MessageChannel;
-		private var _channelToSecondary:MessageChannel;
+		private	var	_channelToMain		:MessageChannel;
+		private	var	_channelToSecondary	:MessageChannel;
 
 
 		public function Secondary()
@@ -34,11 +34,10 @@ package
 													);
 			
 			// send some values to main thread
-			_channelToMain.send("initial send");
-			_channelToMain.send(1);
-			_channelToMain.send([1, 2, 3]);
+			_channelToMain.send(MessageID.START_TRANSFER);
+			_channelToMain.send(12345);
+			_channelToMain.send([1, 2, 3, 4, 5]);
 			_channelToMain.send({});
-			_channelToMain.send("send something back");
 		}
 
 
@@ -47,9 +46,9 @@ package
 			if(_channelToSecondary.messageAvailable)
 			{
 				var message:* = _channelToSecondary.receive();
-				if(String(message) == "all values received!")
+				if(String(message) == MessageID.CONFIRM_RECEPTION)
 				{
-					_channelToMain.send("10-4!");
+					_channelToMain.send(MessageID.TEN_FOUR);
 				}
 			}
 		}
